@@ -1,0 +1,52 @@
+<!DOCTYPE html>  
+<html>  
+    <head>  
+        <title>Facebook Likes</title>  
+        <link rel='stylesheet'>  
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>  
+    </head>  
+    <body>  
+    <p> Number of likes</p>
+    <p id="content_area"> Loading...</p>  
+    <button type="button" id="ajaxbutton" onclick="myAjaxCall()">Click me!</button>
+        
+    <script type="text/javascript">   
+        /* 
+        var content_area = document.getElementById("content_area");  
+        console.log(content_area);
+        function load_content() {
+            console.log("hit!!");
+            load_content();       
+            $.get("/getdata", function(data) {
+                // content_area.innterHTML(data);
+                console.log("getdata fetched");
+                load_content();                                                        });  
+          
+        }  
+        load_content()
+        */
+    </script>  
+    <script type="text/javascript">
+            function loadXMLDoc(url, cfunc) { // ajax code
+                console.log("In loadXmlDoc method");
+                var xmlhttp = new XMLHttpRequest({mozSystem: true});
+                console.log("xmlhttp object " + xmlhttp);
+                xmlhttp.onreadystatechange=cfunc;
+                xmlhttp.open("GET", "http://localhost:8080/getdata", true);
+                xmlhttp.send();
+                // alert("Response is " + xmlhttp.responseText);
+                // document.getElementById("content_area").innerHTML = xmlhttp.responseText;
+            }
+
+            function myAjaxCall() {
+                console.log("In myAjaxCall method");
+                loadXMLDoc("/getdata", function() {
+                    if(xmlhttp.readyState==4 && xmlhttp.status==200) {
+                        console.log("Result is " + xmlhttp.responseText );
+                    }            
+                });
+            }
+        </script>
+
+    </body>  
+</html>  
